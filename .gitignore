@@ -1,0 +1,36 @@
+# Python environment
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Model weights: ~1 GB, fetched by scripts/download_checkpoint.py
+checkpoints/
+
+# Test clips and LRS3 samples are generated or downloaded on demand by
+# scripts/make_test_videos.py and scripts/fetch_lrs3_samples.py. They are also
+# real people's faces, which do not belong in a repository.
+data/
+
+# Debug MP4 exports
+debug_out/
+
+# Upstream research checkouts, cloned for reference; auto_avsr carries its own
+# .git and would otherwise be committed as an embedded repository.
+references/
+
+# Node
+node_modules/
+.next/
+*.tsbuildinfo
+
+# Local configuration
+.env
+.env.local
+.env.*.local
+
+# Editor and OS
+.DS_Store
+Thumbs.db

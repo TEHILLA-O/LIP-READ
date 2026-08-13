@@ -1,0 +1,34 @@
+[project]
+name = "visual-speech-recognition"
+version = "0.1.0"
+description = "Real-time visual speech recognition from lip movement"
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+filterwarnings = [
+    # MediaPipe 0.10.14 uses a protobuf API that warns on newer protobuf builds.
+    "ignore:SymbolDatabase.GetPrototype:UserWarning",
+]
+markers = [
+    "slow: needs the 1 GB checkpoint or several seconds of compute",
+    "model: needs the pretrained checkpoint",
+]
+asyncio_mode = "strict"
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.ruff]
+line-length = 90
+target-version = "py310"
+extend-exclude = ["references", ".venv", "apps"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = [
+    "E501",  # long lines are caught by the formatter
+    "B008",  # FastAPI dependencies are declared as call defaults by design
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["B011"]

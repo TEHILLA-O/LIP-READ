@@ -1,0 +1,13 @@
+# Development and test-only dependencies.
+-r requirements.txt
+
+# Synthetic test-video generation uses scikit-image's bundled public-domain
+# portrait, which keeps the fixtures reproducible and free of real user faces.
+scikit-image>=0.24.0
+
+# Reading a few ground-truth samples out of the LRS3 test parquet without
+# downloading the whole shard.
+pyarrow>=17.0.0
+huggingface-hub>=0.25.0
+
+ruff>=0.8.0

@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+/*
+ * A restrained, near-monochrome palette. The camera and the transcript are the
+ * only things on screen with any weight; everything else recedes.
+ */
+@theme {
+  --color-ink: #08090a;
+  --color-surface: #101113;
+  --color-edge: #232529;
+  --color-chalk: #f4f4f5;
+  --color-muted: #8b8d93;
+  --color-faint: #5c5e64;
+  --color-signal: #5ee9b5;
+  --color-warn: #e9b45e;
+  --color-alert: #e97a6e;
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --animate-breathe: breathe 2.8s ease-in-out infinite;
+  --animate-rise: rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes breathe {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.55;
+      transform: scale(0.86);
+    }
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+html,
+body {
+  background: var(--color-ink);
+  color: var(--color-chalk);
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--color-signal) 30%, transparent);
+}
+
+/* The camera is a mirror. Text burned into the frame would read backwards, but
+   nothing is drawn into the frame, so a plain flip is correct here. */
+.mirror {
+  transform: scaleX(-1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

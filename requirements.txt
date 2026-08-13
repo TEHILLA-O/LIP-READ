@@ -1,0 +1,53 @@
+# ---------------------------------------------------------------------------
+# Visual Speech Recognition - Python / ML backend requirements
+#
+# PyTorch is intentionally NOT listed here because the correct wheel depends on
+# the CUDA runtime. Install it first with one of:
+#
+#   CUDA 12.4 : pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+#   CPU only  : pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+#
+# See scripts/setup_env.ps1 which does this automatically.
+# ---------------------------------------------------------------------------
+
+# --- numerical / vision ---
+numpy>=1.26
+
+# Pinned deliberately. MediaPipe removed the legacy `mp.solutions` API in
+# 0.10.30+; those builds expose only the Tasks API, which needs a separately
+# downloaded .tflite bundle. 0.10.14 ships both BlazeFace models inside the
+# wheel, so setup works offline and matches the detector the Auto-AVSR
+# preprocessing was designed around. Moving to a newer MediaPipe means
+# rewriting ml/preprocessing/face_detector.py against Tasks.
+mediapipe==0.10.14
+
+# MediaPipe pulls in opencv-contrib-python, which provides cv2.
+opencv-python-headless==4.10.0.84
+
+# --- checkpoint format ---
+safetensors>=0.4.5
+
+# --- video I/O (PyAV bundles FFmpeg, so no system FFmpeg install is required) ---
+av==12.3.0
+imageio-ffmpeg==0.5.1
+
+# --- tokenisation / decoding ---
+sentencepiece==0.2.0
+
+# --- API service ---
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20
+pydantic==2.10.4
+pydantic-settings==2.7.0
+websockets==14.1
+
+# --- checkpoint download ---
+gdown==5.2.0
+requests>=2.32.0
+tqdm>=4.66.0
+
+# --- testing ---
+pytest==8.3.4
+pytest-asyncio==0.25.0
+httpx==0.28.1
