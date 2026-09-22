@@ -3,6 +3,8 @@
 Reads speech from lip movement in video — uploaded clips or a live webcam — using
 a pretrained Auto-AVSR visual speech recognition model.
 
+See [FAILURES.md](./FAILURES.md) for what can go wrong, what broke, how it was fixed, and results.
+
 There is no audio anywhere in this system. Every transcript is produced from a
 *sequence* of video frames of a mouth, which is why nothing here will ever tell
 you what a single photograph is saying.
